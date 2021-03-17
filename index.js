@@ -75,16 +75,17 @@ async function runServer(callback, serverType) {
     process.stdout.write(`${data}`)
   });
   
-  server.stderr.on('data', (data) => {
+  // Fail when the server fails to launch
+  server.stdout.on('data', (data) => {
     if (data.includes('Failed to start the minecraft server')) {
       console.log('[ACTION] Server test failed! Exiting process.')
 
+      core.setFailed(serverType + ' server failed to launch!');
+      
       if(process.platform === 'win32')
         spawn("taskkill", ["/pid", server.pid, '/f', '/t']);
       else
         server.kill();
-    
-      core.setFailed(serverType + ' server failed to launch!');
     }
   });
 
