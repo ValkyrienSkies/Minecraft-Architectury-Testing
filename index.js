@@ -37,9 +37,9 @@ async function runBuild(callback) {
 
 
   if(process.platform === 'win32')
-    build = await spawn('cmd', ['/c', 'gradlew', 'build', '--refresh-dependencies'].concat(properties))
+    build = await spawn('cmd', ['/c', 'gradlew', 'build', '--refresh-dependencies']
   else
-    build = await spawn('./gradlew', ['build', '--refresh-dependencies'].concat(properties))
+    build = await spawn('./gradlew', ['build', '--refresh-dependencies']
 
 
   build.stdout.on('data', (data) => process.stdout.write(`${data}`));
@@ -57,9 +57,9 @@ async function runServer(callback, serverType) {
   let server;
 
   if(process.platform === 'win32')
-    server = await spawn('gradlew', [serverType.concat(':runServer'), '--args=“nogui”'].concat(properties), { shell: true});
+    server = await spawn('gradlew', [serverType.concat(':runServer'), '--args=“nogui”'], { shell: true});
   else
-    server = await spawn('./gradlew', [serverType.concat(':runServer'), '--args=“nogui”'].concat(properties));
+    server = await spawn('./gradlew', [serverType.concat(':runServer'), '--args=“nogui”']);
 
   server.stdout.on('data', (data) => {
     if (data.includes('For help, type')) {
