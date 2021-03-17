@@ -1,0 +1,8 @@
+name: 'Minecraft Architectury Tests'
+author: Tri0de
+description: 'Tests Minecraft server with Fabric and Forge'
+inputs: {}
+outputs: {}
+runs:
+  using: 'node12'
+  main: 'index.js'
