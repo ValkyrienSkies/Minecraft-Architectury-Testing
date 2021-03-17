@@ -30,8 +30,6 @@ async function run() {
 
 // Test building the mod
 async function runBuild(callback) {
-  if(!core.getInput('runBuildTest')) return;
-
   let build;
 
 
@@ -53,8 +51,6 @@ async function runBuild(callback) {
 
 // Test running the server
 async function runServer(callback, serverType) {
-  if(!core.getInput('runServerTest')) return;
-
   let server;
 
   if(process.platform === 'win32')
