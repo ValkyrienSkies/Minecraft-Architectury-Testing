@@ -61,6 +61,7 @@ async function runServer(callback, serverType) {
   else
     server = await spawn('./gradlew', [serverType.concat(':runServer'), '--args=“nogui”']);
 
+  // Succeed when the server launches
   server.stdout.on('data', (data) => {
     if (data.includes('For help, type')) {
       console.log('[ACTION] Server test complete! Exiting process.')
@@ -72,6 +73,19 @@ async function runServer(callback, serverType) {
     }
 
     process.stdout.write(`${data}`)
+  });
+  
+  server.stderr.on('data', (data) => {
+    if (data.includes('Failed to start the minecraft server')) {
+      console.log('[ACTION] Server test failed! Exiting process.')
+
+      if(process.platform === 'win32')
+        spawn("taskkill", ["/pid", server.pid, '/f', '/t']);
+      else
+        server.kill();
+    
+      core.setFailed(serverType + ' server failed to launch!');
+    }
   });
 
   server.stderr.on('data', (data) => process.stderr.write(`${data}`));
