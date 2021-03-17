@@ -37,9 +37,9 @@ async function runBuild(callback) {
 
 
   if(process.platform === 'win32')
-    build = await spawn('cmd', ['/c', 'gradlew', 'build', '--refresh-dependencies']
+    build = await spawn('cmd', ['/c', 'gradlew', 'build', '--refresh-dependencies'])
   else
-    build = await spawn('./gradlew', ['build', '--refresh-dependencies']
+    build = await spawn('./gradlew', ['build', '--refresh-dependencies'])
 
 
   build.stdout.on('data', (data) => process.stdout.write(`${data}`));
