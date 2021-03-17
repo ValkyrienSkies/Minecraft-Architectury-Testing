@@ -1,5 +1,8 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
+const fs = require('fs');
+const { spawn } = require('child_process');
+const process = require('process');
 
 // Run the task
 async function run() {
