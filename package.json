@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/ValkyrienSkies/Minecraft-Architectury-Testing/issues"
   },
-  "homepage": "https://github.com/ValkyrienSkies/Minecraft-Architectury-Testing#readme"
+  "homepage": "https://github.com/ValkyrienSkies/Minecraft-Architectury-Testing#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@actions/github": "^4.0.0"
+  }
 }
