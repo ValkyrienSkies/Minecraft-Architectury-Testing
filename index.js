@@ -82,3 +82,5 @@ async function runServer(callback, serverType) {
   // eslint-disable-next-line no-unused-vars
   server.on('close', (code) => callback())
 }
+
+run()
