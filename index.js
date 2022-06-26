@@ -6,6 +6,9 @@ const process = require('process');
 
 // Run the task
 async function run() {
+  if (!(['fabric', 'forge'].includes(process.env.INPUT_SERVERTYPE)))
+    core.setFailed('Invalid server type: ' + process.env.INPUT_SERVERTYPE) 
+
   console.log('[ACTION] Running gradle build test.');
 
   await runBuild(() => {
@@ -17,16 +20,12 @@ async function run() {
       fs.mkdirSync(dir);
 
     fs.writeFile( './run/eula.txt', 'eula=true', { flag: 'wx' }, err => {
-      if(err)
+      if (err)
         core.setFailed(err.message);
 
       runServer(() => {
-          console.log('[ACTION] Fabric server test has passed!')
-          runServer(() => {
-              console.log('[ACTION] Forge server test has passed!')
-              console.log('[ACTION] All tests have passed!')
-          }, 'forge');
-      }, 'fabric');
+          console.log('[ACTION] Run server test has passed!')
+      }, process.env.INPUT_SERVERTYPE);
     });
   })
 }
