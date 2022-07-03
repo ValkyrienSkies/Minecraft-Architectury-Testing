@@ -14,12 +14,12 @@ async function run() {
   await runBuild(() => {
     console.log('[ACTION] Running server test!');
 
-    let dir = './run/'
+    let dir = './' + process.env.INPUT_SERVERTYPE + '/run/'
 
     if (!fs.existsSync(dir))
       fs.mkdirSync(dir);
 
-    fs.writeFile( './run/eula.txt', 'eula=true', { flag: 'wx' }, err => {
+    fs.writeFile( './' + process.env.INPUT_SERVERTYPE + '/run/eula.txt', 'eula=true', { flag: 'wx' }, err => {
       if (err)
         core.setFailed(err.message);
 
